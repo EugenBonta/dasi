@@ -1,9 +1,11 @@
 package com.example.demo.model;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
 @NoArgsConstructor
 @Document(collection = "users")
 public class User {
@@ -13,6 +15,7 @@ public class User {
 
     private String email;
     private String password;
+    private String role = "USER";
 
 
     public String getEmail() {
@@ -29,6 +32,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }
