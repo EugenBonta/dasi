@@ -44,4 +44,17 @@ public class UserService {
         user.setRole(role);
         return userRepository.save(user);
     }
+
+    public User toggleUserRole(String id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+            user.setRole("USER");
+        } else {
+            user.setRole("ADMIN");
+        }
+
+        return userRepository.save(user);
+    }
 }

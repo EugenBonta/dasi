@@ -44,7 +44,12 @@ public class UserController {
     @PutMapping("/{id}/role")
     @PreAuthorize("hasRole('ADMIN')")
     public User updateUserRole(@PathVariable String id, @RequestBody String role) {
-        // Assuming UserService has a method to update role
         return userService.updateUserRole(id, role);
+    }
+
+    @PutMapping("/{id}/toggle-role")
+    @PreAuthorize("hasRole('ADMIN')")
+    public User toggleUserRole(@PathVariable String id) {
+        return userService.toggleUserRole(id);
     }
 }
