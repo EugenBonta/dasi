@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Answer;
 import com.example.demo.model.Question;
 import com.example.demo.model.QuestionRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,6 +11,9 @@ import org.springframework.web.client.RestTemplate;
 public class QuestionSenderService {
 
     private final RestTemplate restTemplate;
+
+    @Value("${external.api.url}")
+    private String apiUrl;
 
     public QuestionSenderService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -20,7 +24,7 @@ public class QuestionSenderService {
             QuestionRequest request = new QuestionRequest(question.getQuestion());
 
             Answer answer = restTemplate.postForObject(
-                    "http://4.235.123.69:8000/ask",
+                    "apiUrl",
                     request,
                     Answer.class
             );
